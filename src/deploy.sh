@@ -27,7 +27,7 @@ print_progress "Merging master"
 git merge master
 
 print_progress "Pushing changes upstream"
-git push origin $1
+git push
 
 print_progress "Switching back to master"
 git checkout master
