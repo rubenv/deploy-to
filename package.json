@@ -1,6 +1,6 @@
 {
     "name"          : "deploy-to",
-    "version"       : "0.0.1",
+    "version"       : "0.0.2",
     "preferGlobal"  : true,
     "description"   : "Git deployment utility script.",
     "keywords"      : ["git", "deploy"],
