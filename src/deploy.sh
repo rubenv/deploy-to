@@ -11,3 +11,4 @@ git checkout $1
 git pull
 git merge master
 git push origin $1
+git checkout master
