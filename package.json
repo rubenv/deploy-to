@@ -15,7 +15,6 @@
     "contributors"  : [],
     "licenses"      : ["MIT"],
     "dependencies"  : [],
-    "engines"       : { "node": ">=0.4.0" },
-    "bin"           : { "deploy-to": "./src/deploy.js" }
+    "bin"           : { "deploy-to": "./src/deploy.sh" }
 }
 
