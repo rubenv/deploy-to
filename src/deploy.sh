@@ -39,30 +39,46 @@ print_error() {
     echo -e "\033[1;31m### ->\033[0m \033[34m$1\033[0m"
 }
 
+print_prompt() {
+    echo -en "\033[1;33m### ->\033[0m \033[34m$1\033[0m (Y/n) "
+}
+
+exit_error() {
+    print_error "$@"
+    exit 1
+}
+
 print_header "Deploying to $1"
 
 if [ -d "node_modules" ]; then
-    git ls-files --others -i --exclude-standard | grep -q ^node_modules
-    ignored=$?
-    if [ $ignored -gt 0 ]; then
-        print_error "node_modules exists but is not in .gitignore, aborting!"
-        exit
+    if ! git ls-files --others -i --exclude-standard | grep -q ^node_modules; then
+        exit_error "node_modules exists but is not in .gitignore, aborting!"
     fi
 fi
 
-print_progress "Switching to $1"
+if ! git ls-remote -q --heads | grep -q refs/heads/$1; then
+    print_prompt "No $1 branch exists, would you like to create it?"
+    read
+    if [ "$REPLY" == "" ] || [ $REPLY == "y" ] || [ $REPLY == "Y" ]; then
+        print_progress "Creating new $1 branch"
+        git checkout -q -b $1
+        git push -u origin $1
+        git checkout -q master
+    else
+        exit_error "Aborted, not creating branch $1"
+    fi
+fi
+
 git checkout -q -B $1 origin/$1 | grep -v 'set up to track remote branch'
 
 print_progress "Pulling latest changes"
 git pull -q
 
-print_progress "Merging master"
+print_progress "Merging master into $1"
 git merge -q master
 
 print_progress "Pushing changes upstream"
 git push -q
-
-print_progress "Switching back to master"
 git checkout -q master
 
 print_progress "All done"
