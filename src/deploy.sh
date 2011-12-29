@@ -60,25 +60,24 @@ if ! git ls-remote -q --heads | grep -q refs/heads/$1; then
     print_prompt "No $1 branch exists, would you like to create it?"
     read
     if [ "$REPLY" == "" ] || [ $REPLY == "y" ] || [ $REPLY == "Y" ]; then
-        print_progress "Creating new $1 branch"
+        print_progress "Creating new $1 branch and pushing"
         git checkout -q -b $1
         git push -u origin $1
-        git checkout -q master
     else
         exit_error "Aborted, not creating branch $1"
     fi
+else
+    git checkout -q -B $1 origin/$1 | grep -v 'set up to track remote branch'
+
+    print_progress "Pulling latest changes"
+    git pull -q
+
+    print_progress "Merging master into $1"
+    git merge -q master
+
+    print_progress "Pushing changes upstream"
+    git push -q
 fi
 
-git checkout -q -B $1 origin/$1 | grep -v 'set up to track remote branch'
-
-print_progress "Pulling latest changes"
-git pull -q
-
-print_progress "Merging master into $1"
-git merge -q master
-
-print_progress "Pushing changes upstream"
-git push -q
 git checkout -q master
-
 print_progress "All done"
