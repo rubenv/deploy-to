@@ -1,19 +1,24 @@
 {
     "name"          : "deploy-to",
-    "version"       : "0.0.5",
+    "version"       : "0.0.6",
     "preferGlobal"  : true,
     "description"   : "Git deployment utility script.",
     "keywords"      : ["git", "deploy"],
     "url"           : "http://github.com/rubenv/deploy-to",
     "repositories"  : [
         {
-            "type" : "git",
-            "url"  : "git://github.com/rubenv/deploy-to.git" 
+            "type"  : "git",
+            "url"   : "git://github.com/rubenv/deploy-to.git" 
         } 
     ],
     "author"        : "Ruben Vermeersch <ruben@savanne.be>",
     "contributors"  : [],
-    "licenses"      : ["MIT"],
+    "licenses"      : [
+        {
+            "type"  : "MIT",
+            "url"   : "https://raw.github.com/rubenv/deploy-to/master/LICENSE"
+        }
+    ],
     "dependencies"  : [],
     "bin"           : { "deploy-to": "./src/deploy.sh" }
 }
