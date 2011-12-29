@@ -17,10 +17,11 @@
 
   This will:
   
-  1. Switch to the target branch.
-  2. Pull the latest version of that branch.
-  3. Merge the master branch into this branch.
-  4. Push the branch.
+  1. Check that node\_modules is in .gitignore (if present).
+  2. Switch to the target branch.
+  3. Pull the latest version of that branch.
+  4. Merge the master branch into this branch.
+  5. Push the branch.
 
   In this case it would merge any changes from master onto the production
   branch and push them upstream. Add git hooks to the server to perform further
