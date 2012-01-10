@@ -23,7 +23,7 @@
 # TODO: Loads of error checking and boundary condition checks.
 
 if [ "" == "$1" ]; then
-    echo "Usage: depploy-to <branch>";
+    echo "Usage: deploy-to <branch>";
     exit;
 fi
 
