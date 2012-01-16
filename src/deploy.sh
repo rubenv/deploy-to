@@ -56,7 +56,7 @@ if [ -d "node_modules" ]; then
     fi
 fi
 
-if ! git ls-remote -q --heads | grep -q refs/heads/$1; then
+if ! git ls-remote -q --heads origin | grep -q refs/heads/$1; then
     print_prompt "No $1 branch exists, would you like to create it?"
     read
     if [ "$REPLY" == "" ] || [ $REPLY == "y" ] || [ $REPLY == "Y" ]; then
