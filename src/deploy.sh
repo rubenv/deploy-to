@@ -51,7 +51,7 @@ exit_error() {
 print_header "Deploying to $1"
 
 if [ -d "node_modules" ]; then
-    if ! git ls-files --others -i --exclude-standard | grep -q ^node_modules; then
+    if ! grep -q ^node_modules .gitignore; then
         exit_error "node_modules exists but is not in .gitignore, aborting!"
     fi
 fi
